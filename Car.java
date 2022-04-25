@@ -6,6 +6,18 @@ public class Car {
   private double carSpeed;
   private int CarSeat;
 
+  public Car() {}
+
+  public Car (String model, int buildYear, float comsuption, String color, double carSpeed, int CarSeat) {
+    this.setModel(model);
+    this.setBuildYear(buildYear);
+    this.setComsuption(comsuption);
+    this.setColor(color);
+    this.setCarSpeed(carSpeed);
+    this.setCarSeat(CarSeat);
+
+  }
+
   public void setModel(String modelValue){
     this.model = modelValue;
   }
@@ -20,7 +32,7 @@ public class Car {
     return this.buildYear;
   }
 
-  public void setModel(Float fuel) {
+  public void setComsuption(Float fuel) {
     this.comsuption = fuel;
   }
   public Float getComsuption () {
