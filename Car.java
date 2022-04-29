@@ -16,10 +16,11 @@ public class Car {
     this.setFuelCapacity(fuelCapacity);
   }
 
-  public void setModel(String modelValue){
+  public void setModel(String modelValue) {
     this.model = modelValue;
   }
-  public String getModel(){
+  
+  public String getModel() {
     return this.model;
   }
 
@@ -33,12 +34,12 @@ public class Car {
   public void setConsuption(Float fuel) {
     this.consuption = fuel;
   }
-  public Float getComsuption () {
+
+  public Float getComsuption() {
     return this.consuption;
   }
-  
 
-  public void setCarSpeed( Double speed) {
+  public void setCarSpeed(Double speed) {
     if (this.isOn()){
       this.carSpeed = speed;
     }
@@ -59,11 +60,6 @@ public class Car {
     return this.power;
   }
 
-  public Car model(String model) {
-    setModel(model);
-    return this;
-  }
-
   public Car buildYear(int buildYear) {
     setBuildYear(buildYear);
     return this;
@@ -74,12 +70,10 @@ public class Car {
     return this;
   }
 
-
   public Car carSpeed(double carSpeed) {
     setCarSpeed(carSpeed);
     return this;
   }
-
 
   public Car power(boolean power) {
     setPower(power);
@@ -93,27 +87,29 @@ public class Car {
     return this.fuelCapacity;
   }
 
-  public void travelDistance(float distance){
+  public void travelDistance(float distance) {
     System.out.println("Travel distance: " + distance );
-      final double carSpending = this.fuelCapacity/this.consuption*100;
-      final double chargingTimes = distance/carSpending;
+    double chargingTimes = distance/this.calculateMaxTravelDistance();
     System.out.println("For this distance you need how many tanks: " + chargingTimes);
-      double doubleNumber = chargingTimes;
-      int intPart = (int) doubleNumber;
-    System.out.println("Number of full tanks: " + intPart);
-    System.out.println("How many more l : " + (Math.ceil((doubleNumber - intPart)* this.fuelCapacity)) + "l");
+    System.out.println("Number of full recharges (including starting one): " + (int) Math.ceil(chargingTimes));
+    double fuelLeft = this.fuelCapacity - (chargingTimes - (int) chargingTimes) * this.fuelCapacity;
+    System.out.println("Fuel left in the tank: " + String.format( "%.2f", fuelLeft) + "l");
+  }
+
+  private double calculateMaxTravelDistance() {
+    return (this.fuelCapacity/this.consuption) * 100;
   }
 
   public void printInConsole() {
-    System.out.println("Model: " + this.model);
-    System.out.println("Build year: " + this.buildYear);
-    System.out.println("Comsuption amount: " + this.consuption + " per 100km");
-    if(this.isOn()){
-      System.out.println("Car speed: " + this.carSpeed);
+    System.out.println("Model: " + this.getModel());
+    System.out.println("Build year: " + this.getBuildYear());
+    System.out.println("Comsuption amount: " + this.getComsuption() + " per 100km");
+    if(this.isOn()) {
+      System.out.println("Car speed: " + this.getCarSpeed());
     } else {
-      System.out.println("Car speed: off");
+      System.out.println("Car is off.");
     }
-    System.out.println("Fuel capacity: " + this.fuelCapacity);
+    System.out.println("Fuel capacity: " + this.getFuelCapacity());
     System.out.println();
   }
 }
